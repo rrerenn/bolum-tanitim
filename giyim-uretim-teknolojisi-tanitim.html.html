@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Giyim Üretim Teknolojisi — Bölümümüzü Tanıyalım</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=DM+Sans:opsz,wght@9..40,400..600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --denim:#20304F;
+    --denim-deep:#16233B;
+    --paper:#FBF7EE;
+    --paper-line:#E7DECB;
+    --ink:#1C2435;
+    --ink-soft:#4A5468;
+    --thread:#DD472F;
+    --thread-soft:#F2D8D1;
+    --chalk:#8FB3D1;
+    --sage:#3E8F66;
+    --sage-soft:#DCEBE2;
+    --mute:#7C8499;
+    --display:"Fraunces", Georgia, serif;
+    --body:"DM Sans", system-ui, sans-serif;
+    --mono:"Space Mono", ui-monospace, monospace;
+    --shadow:0 18px 40px -22px rgba(22,35,59,.55);
+  }
+
+  *{ box-sizing:border-box; }
+
+  .gut-app{
+    font-family:var(--body);
+    color:var(--ink);
+    background:
+      linear-gradient(0deg, transparent 0 23px, var(--paper-line) 23px 24px),
+      linear-gradient(90deg, transparent 0 23px, var(--paper-line) 23px 24px),
+      var(--paper);
+    background-size:24px 24px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    padding:clamp(14px,3vw,40px);
+    min-height:100%;
+  }
+  .gut-app *{ box-sizing:border-box; }
+  .gut-shell{ max-width:1080px; margin:0 auto; }
+
+  .gut-app button{ font-family:inherit; cursor:pointer; }
+  .gut-app :focus-visible{
+    outline:3px solid var(--thread);
+    outline-offset:3px;
+    border-radius:6px;
+  }
+
+  /* ---------- HERO ---------- */
+  .gut-hero{
+    position:relative;
+    background:var(--denim);
+    color:#F4EFE4;
+    border-radius:20px;
+    padding:clamp(26px,4.5vw,52px);
+    overflow:hidden;
+    box-shadow:var(--shadow);
+  }
+  .gut-hero::after{
+    content:"";
+    position:absolute; inset:11px;
+    border:2px dashed rgba(143,179,209,.55);
+    border-radius:13px;
+    pointer-events:none;
+  }
+  .gut-hero-eyebrow{
+    font-family:var(--mono);
+    font-size:12px; letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--chalk);
+    margin:0 0 18px;
+    display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+  }
+  .gut-hero-eyebrow .dot{ width:7px; height:7px; border-radius:50%; background:var(--thread); display:inline-block; }
+  .gut-hero h1{
+    font-family:var(--display);
+    font-weight:600;
+    font-size:clamp(32px,6vw,60px);
+    line-height:1.02;
+    letter-spacing:-.02em;
+    margin:0 0 4px;
+    max-width:16ch;
+  }
+  .gut-hero h1 em{ font-style:italic; color:var(--chalk); }
+  .gut-hero h1 .thr{ color:var(--thread); font-style:italic; }
+  .gut-hero p.lede{
+    font-size:clamp(15px,2vw,18px);
+    max-width:54ch;
+    color:#D9D2C4;
+    margin:18px 0 0;
+  }
+  .gut-hero .meta{
+    margin-top:26px;
+    display:flex; gap:10px 28px; flex-wrap:wrap;
+    font-family:var(--mono); font-size:12.5px; letter-spacing:.04em;
+    color:#CBD6E2;
+  }
+  .gut-hero .meta b{ color:#fff; font-weight:700; }
+  .gut-hero .start-hint{
+    margin-top:26px;
+    display:inline-flex; align-items:center; gap:9px;
+    font-family:var(--mono); font-size:12px; letter-spacing:.12em;
+    text-transform:uppercase; color:var(--chalk);
+  }
+  .gut-hero .start-hint .arr{ animation:nudge 1.8s ease-in-out infinite; }
+
+  /* department name — right side of hero */
+  .gut-hero-mark{
+    position:absolute;
+    right:clamp(34px,5vw,66px);
+    top:50%;
+    transform:translateY(-50%);
+    padding-left:26px;
+    border-left:2px dashed rgba(143,179,209,.6);
+    text-align:left;
+    z-index:1;
+  }
+  .gut-hero-mark .lbl{
+    display:block;
+    font-family:var(--mono);
+    font-size:11.5px; letter-spacing:.24em;
+    text-transform:uppercase; color:var(--chalk);
+    margin-bottom:12px;
+  }
+  .gut-hero-mark .ln{
+    display:block;
+    font-family:var(--display);
+    font-weight:600;
+    font-size:clamp(30px,3.4vw,46px);
+    line-height:1.02;
+    letter-spacing:-.015em;
+    color:#EDE7DA;
+    white-space:nowrap;
+  }
+  .gut-hero-mark .ln.accent{ font-style:italic; color:var(--chalk); }
+  /* dar ekranlarda tek satır, akış içinde */
+  @media (min-width:901px){
+    .gut-hero{ padding-right:370px; }
+  }
+  @media (max-width:900px){
+    .gut-hero-mark{
+      position:static; transform:none;
+      margin-top:26px; padding-left:18px;
+      border-left-width:2px;
+    }
+    .gut-hero-mark .lbl{ margin-bottom:7px; }
+    .gut-hero-mark .ln{
+      display:inline; font-size:clamp(21px,4.6vw,30px); white-space:normal;
+    }
+    .gut-hero-mark .ln.accent{ font-style:italic; }
+  }
+  @keyframes nudge{ 0%,100%{ transform:translateY(0) } 50%{ transform:translateY(5px) } }
+
+  /* ---------- SECTION HEAD ---------- */
+  .gut-sec-head{
+    display:flex; align-items:flex-end; justify-content:space-between;
+    gap:16px; flex-wrap:wrap;
+    margin:42px 4px 18px;
+  }
+  .gut-sec-head h2{
+    font-family:var(--display); font-weight:600;
+    font-size:clamp(20px,3vw,27px); letter-spacing:-.01em;
+    margin:0; color:var(--ink);
+  }
+  .gut-sec-head p{ margin:4px 0 0; color:var(--ink-soft); font-size:14.5px; }
+  .gut-progress{
+    font-family:var(--mono); font-size:12px; letter-spacing:.06em;
+    color:var(--mute); white-space:nowrap;
+    display:flex; align-items:center; gap:9px;
+  }
+  .gut-progress .bar{ width:84px; height:7px; border-radius:4px; background:var(--paper-line); overflow:hidden; }
+  .gut-progress .bar i{ display:block; height:100%; width:0; background:var(--sage); transition:width .5s ease; }
+
+  /* ---------- GRID OF AREAS ---------- */
+  .gut-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(248px,1fr));
+    gap:16px;
+  }
+  .gut-card{
+    position:relative;
+    text-align:left;
+    background:#fff;
+    border:1.5px solid var(--paper-line);
+    border-radius:14px;
+    padding:20px 19px 18px;
+    transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    overflow:hidden;
+  }
+  .gut-card::before{ /* topstitch */
+    content:""; position:absolute; inset:7px;
+    border:1.5px dashed var(--paper-line);
+    border-radius:9px; pointer-events:none;
+    transition:border-color .18s ease;
+  }
+  .gut-card::after{ /* notch */
+    content:""; position:absolute; top:-9px; right:24px;
+    width:18px; height:18px; background:var(--paper);
+    border:1.5px solid var(--paper-line);
+    border-bottom:none; border-right:none;
+    transform:rotate(45deg);
+  }
+  .gut-card:hover{ transform:translateY(-4px); box-shadow:var(--shadow); border-color:var(--denim); }
+  .gut-card:hover::before{ border-color:var(--thread); }
+  .gut-card .no{
+    font-family:var(--mono); font-size:12px; letter-spacing:.1em;
+    color:var(--thread); font-weight:700;
+  }
+  .gut-card .tag{
+    float:right;
+    font-family:var(--mono); font-size:10px; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--mute);
+    border:1px solid var(--paper-line); border-radius:20px;
+    padding:3px 9px; margin-top:-2px;
+  }
+  .gut-card h3{
+    font-family:var(--display); font-weight:600;
+    font-size:19px; line-height:1.15; letter-spacing:-.01em;
+    margin:16px 0 7px; color:var(--ink);
+  }
+  .gut-card p{ margin:0; font-size:13.6px; color:var(--ink-soft); }
+  .gut-card .go{
+    margin-top:15px;
+    display:inline-flex; align-items:center; gap:7px;
+    font-family:var(--mono); font-size:11.5px; letter-spacing:.08em;
+    text-transform:uppercase; color:var(--denim); font-weight:700;
+  }
+  .gut-card.done{ border-color:var(--sage); background:linear-gradient(180deg,#fff,var(--sage-soft)); }
+  .gut-card.done .check{
+    position:absolute; top:14px; right:16px;
+    width:24px; height:24px; border-radius:50%;
+    background:var(--sage); color:#fff; font-size:14px;
+    display:grid; place-items:center;
+  }
+  .gut-card.done .tag{ display:none; }
+
+  /* ---------- FLOW (modal panel) ---------- */
+  .gut-overlay{
+    position:fixed; inset:0; z-index:9999;
+    background:rgba(22,35,59,.5);
+    backdrop-filter:blur(3px);
+    display:flex; align-items:flex-start; justify-content:center;
+    padding:clamp(10px,3vw,40px);
+    overflow-y:auto;
+    opacity:0; pointer-events:none;
+    transition:opacity .22s ease;
+  }
+  .gut-overlay.on{ opacity:1; pointer-events:auto; }
+  .gut-panel{
+    position:relative;
+    width:min(640px,100%);
+    background:var(--paper);
+    border-radius:20px;
+    box-shadow:0 30px 70px -20px rgba(10,18,33,.7);
+    overflow:hidden;
+    transform:translateY(14px) scale(.99);
+    transition:transform .26s cubic-bezier(.2,.8,.2,1);
+  }
+  .gut-overlay.on .gut-panel{ transform:none; }
+
+  .gut-panel-top{
+    background:var(--denim); color:#F2ECDF;
+    padding:20px 22px 18px; position:relative;
+  }
+  .gut-panel-top .no{ font-family:var(--mono); font-size:12px; letter-spacing:.16em; color:var(--chalk); }
+  .gut-panel-top h2{
+    font-family:var(--display); font-weight:600; font-style:italic;
+    font-size:clamp(21px,3.4vw,27px); margin:6px 0 0; letter-spacing:-.01em;
+  }
+  .gut-close{
+    position:absolute; top:16px; right:16px;
+    width:36px; height:36px; border-radius:50%;
+    background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.25);
+    color:#fff; font-size:17px; line-height:1; display:grid; place-items:center;
+    transition:background .15s ease;
+  }
+  .gut-close:hover{ background:rgba(255,255,255,.24); }
+
+  /* tape-measure progress */
+  .gut-ruler{
+    display:flex; align-items:center; gap:11px;
+    padding:13px 22px; background:#fff;
+    border-bottom:1.5px dashed var(--paper-line);
+    font-family:var(--mono); font-size:11px; letter-spacing:.1em;
+    color:var(--mute); text-transform:uppercase;
+  }
+  .gut-ruler .tape{ flex:1; height:18px; position:relative; border-radius:4px;
+    background:repeating-linear-gradient(90deg,var(--paper-line) 0 1px, transparent 1px 14px);
+    overflow:hidden; }
+  .gut-ruler .tape i{ position:absolute; top:0; left:0; height:100%;
+    background:linear-gradient(90deg,var(--thread),#e8694f); width:0; transition:width .4s ease;
+    border-right:2px solid var(--denim); border-radius:4px 0 0 4px; }
+
+  .gut-flow{ padding:24px 22px 26px; }
+  .gut-step{ animation:rise .3s ease both; }
+  @keyframes rise{ from{ opacity:0; transform:translateY(10px) } to{ opacity:1; transform:none } }
+
+  .gut-q-label{
+    font-family:var(--mono); font-size:11px; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--thread); font-weight:700;
+    display:flex; align-items:center; gap:8px;
+  }
+  .gut-q-label::before{ content:""; width:10px; height:10px; transform:rotate(45deg);
+    border:2px solid var(--thread); border-radius:1px; }
+  .gut-q{
+    font-family:var(--display); font-weight:600;
+    font-size:clamp(20px,3.3vw,25px); line-height:1.2; letter-spacing:-.01em;
+    margin:13px 0 0; color:var(--ink);
+  }
+  .gut-a{
+    margin:18px 0 0; padding:18px 20px;
+    background:#fff; border:1.5px solid var(--paper-line);
+    border-left:4px solid var(--chalk); border-radius:12px;
+    font-size:15.5px; color:var(--ink-soft);
+    animation:rise .3s ease both;
+  }
+  .gut-a.evet{ border-left-color:var(--sage); }
+  .gut-a.hayir{ border-left-color:var(--thread); }
+  .gut-a .pill{
+    display:inline-block; margin-bottom:9px;
+    font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase;
+    padding:3px 10px; border-radius:20px;
+  }
+  .gut-a.evet .pill{ background:var(--sage-soft); color:var(--sage); }
+  .gut-a.hayir .pill{ background:var(--thread-soft); color:var(--thread); }
+
+  .gut-actions{ margin-top:22px; display:flex; gap:11px; flex-wrap:wrap; }
+
+  .gut-btn{
+    border:none; border-radius:11px;
+    padding:13px 22px; font-size:14.5px; font-weight:600;
+    display:inline-flex; align-items:center; gap:8px;
+    transition:transform .14s ease, filter .14s ease, background .14s ease;
+  }
+  .gut-btn:active{ transform:translateY(1px); }
+  .gut-btn.primary{ background:var(--denim); color:#fff; }
+  .gut-btn.primary:hover{ filter:brightness(1.12); }
+  .gut-btn.evet{ background:var(--sage); color:#fff; }
+  .gut-btn.evet:hover{ filter:brightness(1.07); }
+  .gut-btn.hayir{ background:#fff; color:var(--denim); border:1.5px solid var(--denim); }
+  .gut-btn.hayir:hover{ background:var(--denim); color:#fff; }
+  .gut-btn.ghost{ background:transparent; color:var(--ink-soft); border:1.5px solid var(--paper-line); }
+  .gut-btn.ghost:hover{ border-color:var(--denim); color:var(--denim); }
+
+  .gut-ask-hint{ margin:18px 0 4px; font-size:13px; color:var(--mute); font-style:italic; }
+
+  /* completion */
+  .gut-done-wrap{ text-align:center; padding:8px 4px 4px; animation:rise .3s ease both; }
+  .gut-done-wrap .seal{
+    width:60px; height:60px; margin:0 auto 16px; border-radius:50%;
+    background:var(--sage); color:#fff; display:grid; place-items:center; font-size:30px;
+    box-shadow:0 0 0 6px var(--sage-soft);
+  }
+  .gut-done-wrap h3{ font-family:var(--display); font-weight:600; font-size:23px; margin:0 0 6px; }
+  .gut-done-wrap p{ color:var(--ink-soft); font-size:15px; max-width:42ch; margin:0 auto 20px; }
+
+  .gut-alldone{
+    margin:18px 4px 0; padding:16px 20px;
+    background:var(--sage-soft); border:1.5px dashed var(--sage); border-radius:12px;
+    color:#256b48; font-size:14.5px; display:none; align-items:center; gap:12px;
+  }
+  .gut-alldone.show{ display:flex; }
+  .gut-alldone b{ color:#1d563a; }
+
+  @media (max-width:560px){
+    .gut-card .tag{ display:none; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{ animation:none !important; transition:none !important; }
+  }
+</style>
+</head>
+<body>
+<div class="gut-app">
+  <div class="gut-shell">
+
+    <!-- HERO -->
+    <header class="gut-hero">
+      <p class="gut-hero-eyebrow"><span class="dot"></span> Marmara Üniversitesi · Teknik Bilimler MYO · Ön Lisans</p>
+      <h1>Bölümümüzü <span class="thr">Tanıyalım</span></h1>
+      <p class="lede">Aklındaki soruları seç, cevabını al.</p>
+      <div class="meta">
+        <span>Süre: <b>2 yıl</b></span>
+        <span>Eğitim: <b>Teori + Uygulamalı</b></span>
+        <span>Unvan: <b>Tekstil Teknikeri</b></span>
+      </div>
+      <div class="start-hint">Aşağıdan bir alan seç <span class="arr">↓</span></div>
+
+      <div class="gut-hero-mark">
+        <span class="lbl">Program</span>
+        <span class="ln">Giyim</span>
+        <span class="ln">Üretim</span>
+        <span class="ln accent">Teknolojisi</span>
+      </div>
+    </header>
+
+    <!-- SECTION HEAD -->
+    <div class="gut-sec-head">
+      <div>
+        <h2>Merak ettiğin alanı seç</h2>
+      </div>
+      <div class="gut-progress" aria-live="polite">
+        <span id="gutCount">0 / 6 alan</span>
+        <span class="bar"><i id="gutBar"></i></span>
+      </div>
+    </div>
+
+    <!-- GRID -->
+    <main class="gut-grid" id="gutGrid"></main>
+
+    <div class="gut-alldone" id="gutAllDone">
+      <span style="font-size:20px">✓</span>
+      <span><b>Altı alanı da inceledin!</b> Aklında hâlâ soru varsa bölümümüze her zaman ulaşabilirsin.</span>
+    </div>
+
+  </div>
+</div>
+
+<!-- FLOW OVERLAY -->
+<div class="gut-overlay" id="gutOverlay" role="dialog" aria-modal="true" aria-labelledby="gutPanelTitle">
+  <div class="gut-panel">
+    <div class="gut-panel-top">
+      <button class="gut-close" id="gutClose" aria-label="Kapat">✕</button>
+      <span class="no" id="gutPanelNo">ALAN 01</span>
+      <h2 id="gutPanelTitle">Başlık</h2>
+    </div>
+    <div class="gut-ruler">
+      <span>Adım</span>
+      <span class="tape"><i id="gutTape"></i></span>
+      <span id="gutStepNo">1</span>
+    </div>
+    <div class="gut-flow" id="gutFlow"></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ============ İÇERİK: ALANLAR ============
+     Her alanda 'start' düğümünden başlayan bir akış var.
+     Düğüm tipleri:
+       - { q, a, next }      : soru + cevap, sonra 'next'
+       - { q, ask:true, evet, hayir } : evet/hayır dallanması
+       - { a, next }         : önceki evet/hayır seçimine verilen cevap
+       - son düğümlerde 'next' yoksa alan tamamlanır
+  ============================================ */
+  var AREAS = [
+    {
+      no:"01", tag:"Tanışma", title:"Bu Bölüm Ne İş Yapar?",
+      blurb:"Adı uzun ama işi net. En baştan başlayalım.",
+      start:"q1",
+      nodes:{
+        q1:{ q:"Giyim Üretim Teknolojisi tam olarak ne öğretiyor?",
+             a:"Bir fikrin nasıl giysiye dönüştüğünü baştan sona: ölçü almak, kalıp çıkarmak, kumaşı kesmek, dikmek ve üretimi planlamak. Yani mağazadaki bir tişörtün arkasındaki tüm teknik süreç. Burada bunu hem teoride hem atölyede yaparak öğreniyorsun.",
+             next:"q2" },
+        q2:{ q:"Kıyafetlerin nasıl üretildiğini hiç merak ettin mi?", ask:true, evet:"q2e", hayir:"q2h" },
+        q2e:{ a:"O merak tam da bu bölümün başlangıç noktası. Burada “nasıl yapılıyor?” sorusunun cevabını makinelerin başında, kendi ellerinle bulacaksın.", next:"q3" },
+        q2h:{ a:"Sorun değil — çoğu öğrenci de etiketteki “made in” yazısından öteye bakmamıştı. İlk atölye dersinden sonra mağazalara bakışın değişiyor, söz.", next:"q3" },
+        q3:{ q:"Mezun olunca ne unvanı alıyorum?",
+             a:"İki yılın sonunda “Tekstil Teknikeri” unvanıyla mezun oluyorsun: üretim hattında sorumluluk alabilen, tasarımla atölye arasında köprü kuran teknik bir uzman." }
+      }
+    },
+    {
+      no:"02", tag:"Kendini Tanı", title:"Bu Bölüm Bana Uygun mu?",
+      blurb:"Birkaç soruyla birlikte düşünelim. Cevabın yolu belirliyor.",
+      start:"q1",
+      nodes:{
+        q1:{ q:"Elinle bir şeyler üretmek, yapıp bozmak sana keyif verir mi?", ask:true, evet:"yes1", hayir:"no1" },
+        yes1:{ a:"Harika başlangıç. Burada ders çoğu zaman makine başında, kumaş elinde geçiyor.", next:"q2a" },
+        no1:{ a:"Olsun — el becerisi burada öğretilen bir şey, doğuştan gelmesi gerekmiyor.", next:"q2b" },
+
+        q2a:{ q:"Peki bir de yaratıcı / tasarım tarafın güçlü mü?", ask:true, evet:"r_perfect", hayir:"r_tech" },
+        q2b:{ q:"Kıyafet, moda ya da bir şeyin “nasıl yapıldığı” merakını çekiyor mu?", ask:true, evet:"r_curious", hayir:"r_explore" },
+
+        r_perfect:{ q:"Senin için sonuç:",
+          a:"Üretmeyi de tasarlamayı da seviyorsun — bu bölüm tam ortanda duruyor. Senin gibi profiller burada en mutlu olan grup. Diğer alanlara göz atıp emin ol." },
+        r_tech:{ q:"Senin için sonuç:",
+          a:"Üretmeyi seviyorsun, gerisi gelir. Teknik ve üretim tarafında güçlü bir tekniker olabilirsin; tasarım kası zamanla gelişir. Bölüm her iki profile de yer açıyor." },
+        r_curious:{ q:"Senin için sonuç:",
+          a:"O merak yeterli bir başlangıç. El becerisi burada öğrettiğimiz bir şey; merakla gelenler hızlı ilerliyor. Atölye alanına bakmanı öneririz." },
+        r_explore:{ q:"Senin için sonuç:",
+          a:"Belki de ilgini henüz keşfetmedin. Atölye temelli bir bölüm bazen hiç beklemediğin bir yeteneği ortaya çıkarır. Acele yok — diğer alanları gez, sonra karar ver." }
+      }
+    },
+    {
+      no:"03", tag:"Atölye", title:"Atölyede Ne Yapacağım?",
+      blurb:"Bölümün kalbi: konfeksiyon ve kalıp atölyeleri.",
+      start:"q1",
+      nodes:{
+        q1:{ q:"Atölyelerde neler var?",
+             a:"Konfeksiyon ve kalıp tasarımı atölyeleri: endüstriyel dikim makineleri, kesim masaları, kalıp çıkarma alanları. Kısacası gerçek bir üretim ortamının küçük bir hâli okulun içinde.",
+             next:"q2" },
+        q2:{ q:"Hiç dikiş bilmiyorum, makineden çekiniyorum — ne olacak?",
+             a:"Herkes sıfırdan başlıyor. İlk dersler makineyi tanıma, iğne-iplik ve düz dikiş gibi temellerle başlıyor. Birkaç hafta içinde çoğu öğrenci makineyi rahatça kullanıyor.",
+             next:"q3" },
+        q3:{ q:"Kendi tasarladığım bir şeyi dikebilir miyim?",
+             a:"Evet. İlerleyen dönemlerde kendi modelini kalıbından dikimine kadar tek başına üretebiliyorsun. Birçok öğrenci için bölümün en keyifli kısmı tam olarak burası." }
+      }
+    },
+    {
+      no:"04", tag:"Beceri", title:"Hangi Becerileri Kazanırım?",
+      blurb:"Diplomanın yanında elinde kalanlar.",
+      start:"q1",
+      nodes:{
+        q1:{ q:"Bu bölüm bana hangi becerileri kazandırır?",
+             a:"Kalıp çıkarma, kesim ve dikim teknikleri, üretim sürecini ve iş akışını planlama, yeni ürün tasarlama, ürün geliştirme (Ar-Ge) ve hem bağımsız hem ekip içinde çalışma.",
+             next:"q2" },
+        q2:{ q:"Bu beceriler sadece tekstilde mi işime yarar?",
+             a:"Hayır. Planlama, problem çözme, ölçü-oran düşünme, ekip çalışması ve detaya dikkat her sektörde değerli. Üretim mantığını öğrenmek genel bir “iş yapma” becerisi kazandırıyor.",
+             next:"q3" },
+        q3:{ q:"Yaratıcı tarafımı kullanabilecek miyim?", ask:true, evet:"q3e", hayir:"q3h" },
+        q3e:{ a:"Bolca. Model uygulama, ürün biçimlendirme ve tasarım dersleri tam yaratıcılık alanı. Tekniği öğrenmek yaratıcılığını kısıtlamaz; tam tersine onu hayata geçirmeni sağlar." },
+        q3h:{ a:"O da harika. Kalıp matematiği, makineler ve üretim planlama gibi tamamen teknik alanlarda derinleşebilirsin. Bölüm her iki profile de yer açıyor." }
+      }
+    },
+    {
+      no:"05", tag:"Kariyer", title:"Mezun Olunca İş Var mı?",
+      blurb:"En çok merak edilen alan. Açık konuşalım.",
+      start:"q1",
+      nodes:{
+        q1:{ q:"Nerelerde çalışabilirim?",
+             a:"Hazır giyim üretim fabrikaları, ihracat firmaları, tasarım ofisleri, nakış–baskı–yıkama işletmeleri… Bir giysinin fikirden mağazaya ulaşana kadar geçtiği tüm aşamalarda teknikere ihtiyaç var.",
+             next:"q2" },
+        q2:{ q:"Sence tekstil sektöründe iş bulmak kolay mı?", ask:true, evet:"q2e", hayir:"q2h" },
+        q2e:{ a:"Doğru sezgi. Türkiye, hazır giyimde dünyanın önde gelen üreticilerinden. Nitelikli ara eleman (tekniker) ihtiyacı sürekli; talep yüksek.", next:"q3" },
+        q2h:{ a:"Aslında durum tahmininin tersi olabilir: Türkiye büyük bir hazır giyim üreticisi ve firmalar için nitelikli tekniker bulmak zor. Bu da senin lehine.", next:"q3" },
+        q3:{ q:"Sadece fabrikada mı çalışırım?",
+             a:"Hayır. Üretim planlama, kalite kontrol, model/numune, ürün geliştirme ve satınalma gibi ofis tarafında da roller var. Hangi tarafın sana uyduğunu okurken keşfediyorsun." }
+      }
+    },
+    {
+      no:"06", tag:"Eğitime Devam", title:"Lisansa Geçebilir miyim? (DGS)",
+      blurb:"İki yıl son değil; istersen yolun açık.",
+      start:"q1",
+      nodes:{
+        q1:{ q:"İki yıl yeter mi, yoksa 4 yıllık lisans mı istersin?", ask:true, evet:"q1e", hayir:"q1h" },
+        q1e:{ a:"Lisans istiyorsan DGS tam sana göre. Ön lisansı başarıyla bitirip Dikey Geçiş Sınavı’nda başarılı olursan ilgili lisans bölümlerine geçebilirsin.", next:"q2" },
+        q1h:{ a:"Çok mantıklı: iki yılda meslek sahibi olup çalışmaya başlayabilirsin. İstersen çalışırken de ileride DGS hakkın duruyor, kapı kapanmıyor.", next:"q2" },
+        q2:{ q:"DGS ile hangi bölümlere geçebilirim?",
+             a:"Tekstil Mühendisliği, Tekstil, Tekstil Tasarımı, Tekstil ve Moda Tasarımı, Moda Giyim Tasarımı ve Moda Tasarımı gibi lisans programlarına geçiş yapabilirsin.",
+             next:"q3" },
+        q3:{ q:"DGS zor mu?",
+             a:"Sayısal-mantık ağırlıklı bir sınav; düzenli çalışmayla hazırlanabilir. Ön lisans notların (AGNO) ve sınav puanın birlikte değerlendirildiği için okurken derslerini ihmal etmemek avantaj." }
+      }
+    }
+  ];
+
+  /* ============ DURUM ============ */
+  var visited = {};
+  var current = null;
+  var stepCount = 0;
+  var lastFocus = null;
+
+  /* ============ DOM ============ */
+  var grid     = document.getElementById("gutGrid");
+  var overlay  = document.getElementById("gutOverlay");
+  var flow     = document.getElementById("gutFlow");
+  var panelNo  = document.getElementById("gutPanelNo");
+  var panelTit = document.getElementById("gutPanelTitle");
+  var tape     = document.getElementById("gutTape");
+  var stepNoEl = document.getElementById("gutStepNo");
+  var countEl  = document.getElementById("gutCount");
+  var barEl    = document.getElementById("gutBar");
+  var allDone  = document.getElementById("gutAllDone");
+
+  var TOTAL = AREAS.length;
+
+  /* ============ KARTLARI ÇİZ ============ */
+  function renderGrid(){
+    grid.innerHTML = "";
+    AREAS.forEach(function(area, i){
+      var done = !!visited[area.no];
+      var card = document.createElement("button");
+      card.className = "gut-card" + (done ? " done" : "");
+      card.type = "button";
+      card.setAttribute("aria-label", "Alan " + area.no + ": " + area.title);
+      card.innerHTML =
+        (done ? '<span class="check" aria-hidden="true">✓</span>' : '') +
+        '<span class="no">ALAN ' + area.no + '</span>' +
+        '<span class="tag">' + area.tag + '</span>' +
+        '<h3>' + area.title + '</h3>' +
+        '<p>' + area.blurb + '</p>' +
+        '<span class="go">' + (done ? 'Tekrar bak' : 'Soruları aç') + ' →</span>';
+      card.addEventListener("click", function(){ openArea(i, card); });
+      grid.appendChild(card);
+    });
+    updateProgress();
+  }
+
+  function updateProgress(){
+    var n = Object.keys(visited).length;
+    countEl.textContent = n + " / " + TOTAL + " alan";
+    barEl.style.width = (n/TOTAL*100) + "%";
+    allDone.classList.toggle("show", n === TOTAL);
+  }
+
+  /* ============ AKIŞI AÇ ============ */
+  function openArea(index, trigger){
+    current = AREAS[index];
+    stepCount = 0;
+    lastFocus = trigger || document.activeElement;
+    panelNo.textContent = "ALAN " + current.no + " · " + current.tag.toUpperCase();
+    panelTit.textContent = current.title;
+    overlay.classList.add("on");
+    document.body.style.overflow = "hidden";
+    renderNode(current.start);
+    document.getElementById("gutClose").focus();
+  }
+
+  function closeArea(){
+    overlay.classList.remove("on");
+    document.body.style.overflow = "";
+    if(lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+
+  /* ============ DÜĞÜM ÇİZ ============ */
+  function renderNode(id){
+    var node = current.nodes[id];
+    if(!node) return;
+    stepCount++;
+    stepNoEl.textContent = stepCount;
+    tape.style.width = Math.min(stepCount*22, 100) + "%";
+
+    var html = '<div class="gut-step">';
+
+    if(node.ask){
+      html += '<span class="gut-q-label">Soru</span>';
+      html += '<h3 class="gut-q">' + node.q + '</h3>';
+      html += '<p class="gut-ask-hint">Sana en yakın olanı seç — cevap ona göre geliyor.</p>';
+      html += '<div class="gut-actions">';
+      html += '<button class="gut-btn evet" data-go="'+node.evet+'" data-side="evet">Evet</button>';
+      html += '<button class="gut-btn hayir" data-go="'+node.hayir+'" data-side="hayir">Hayır</button>';
+      html += '</div>';
+    } else if(node.q){
+      html += '<span class="gut-q-label">Soru</span>';
+      html += '<h3 class="gut-q">' + node.q + '</h3>';
+      html += '<div id="gutReveal"></div>';
+      html += '<div class="gut-actions" id="gutAct">';
+      html += '<button class="gut-btn primary" data-reveal="'+id+'">Cevabı gör</button>';
+      html += '</div>';
+    } else {
+      html += '<div class="gut-a '+(window.__side||'')+'">';
+      if(window.__side) html += '<span class="pill">'+(window.__side==='evet'?'Senin cevabın: Evet':'Senin cevabın: Hayır')+'</span><br>';
+      html += node.a + '</div>';
+      html += continueRow(node);
+    }
+
+    html += '</div>';
+    flow.innerHTML = html;
+    bindNode(id, node);
+  }
+
+  function continueRow(node){
+    if(node.next){
+      return '<div class="gut-actions"><button class="gut-btn primary" data-go="'+node.next+'">Sonraki soru →</button>'
+           + '<button class="gut-btn ghost" data-close="1">Alandan çık</button></div>';
+    }
+    return '';
+  }
+
+  function bindNode(id, node){
+    var rv = flow.querySelector('[data-reveal]');
+    if(rv){
+      rv.addEventListener("click", function(){
+        var box = document.getElementById("gutReveal");
+        box.innerHTML = '<div class="gut-a">'+node.a+'</div>';
+        var act = document.getElementById("gutAct");
+        if(node.next){
+          act.innerHTML = '<button class="gut-btn primary" data-go="'+node.next+'">Sonraki soru →</button>'
+                        + '<button class="gut-btn ghost" data-close="1">Alandan çık</button>';
+        } else {
+          act.innerHTML = '<button class="gut-btn primary" data-finish="1">Bu alanı tamamla ✓</button>';
+        }
+        rebind();
+      });
+    }
+    rebind();
+
+    if(!node.q && !node.ask && !node.next){
+      finishArea();
+    }
+  }
+
+  function rebind(){
+    flow.querySelectorAll('[data-go]').forEach(function(b){
+      if(b.__bound) return; b.__bound = true;
+      b.addEventListener("click", function(){
+        if(b.dataset.side) window.__side = b.dataset.side; else window.__side = "";
+        renderNode(b.dataset.go);
+      });
+    });
+    flow.querySelectorAll('[data-close]').forEach(function(b){
+      if(b.__bound) return; b.__bound = true;
+      b.addEventListener("click", function(){ closeArea(); });
+    });
+    flow.querySelectorAll('[data-finish]').forEach(function(b){
+      if(b.__bound) return; b.__bound = true;
+      b.addEventListener("click", finishArea);
+    });
+  }
+
+  /* ============ ALANI TAMAMLA ============ */
+  function finishArea(){
+    visited[current.no] = true;
+    var nextArea = AREAS.find(function(a){ return !visited[a.no]; });
+    var html = '<div class="gut-done-wrap">';
+    html += '<div class="seal" aria-hidden="true">✓</div>';
+    html += '<h3>“'+current.title+'” tamam.</h3>';
+    if(nextArea){
+      html += '<p>Bu alanı incelemiş oldun. Başka bir merak ettiğin alana geçebilir ya da listeye dönebilirsin.</p>';
+      html += '<div class="gut-actions" style="justify-content:center">';
+      html += '<button class="gut-btn primary" id="gutNextArea">Sıradaki: '+nextArea.title+' →</button>';
+      html += '<button class="gut-btn ghost" data-close="1">Tüm alanlara dön</button>';
+      html += '</div>';
+    } else {
+      html += '<p>Tüm alanları tamamladın! Aklında kalan soru olursa doğrudan bölümümüze yazabilirsin.</p>';
+      html += '<div class="gut-actions" style="justify-content:center">';
+      html += '<a class="gut-btn evet" href="https://tky-tbmyo.marmara.edu.tr/iletisim" target="_blank" rel="noopener" style="text-decoration:none">Bölümle iletişime geç</a>';
+      html += '<button class="gut-btn ghost" data-close="1">Tüm alanlara dön</button>';
+      html += '</div>';
+    }
+    html += '</div>';
+    flow.innerHTML = html;
+    tape.style.width = "100%";
+
+    var nb = document.getElementById("gutNextArea");
+    if(nb) nb.addEventListener("click", function(){
+      var idx = AREAS.indexOf(nextArea);
+      openArea(idx, lastFocus);
+    });
+    flow.querySelectorAll('[data-close]').forEach(function(b){
+      b.addEventListener("click", function(){ closeArea(); renderGrid(); });
+    });
+    updateProgress();
+  }
+
+  /* ============ KAPATMA / KLAVYE ============ */
+  document.getElementById("gutClose").addEventListener("click", function(){ closeArea(); renderGrid(); });
+  overlay.addEventListener("click", function(e){ if(e.target === overlay){ closeArea(); renderGrid(); } });
+  document.addEventListener("keydown", function(e){
+    if(e.key === "Escape" && overlay.classList.contains("on")){ closeArea(); renderGrid(); }
+  });
+
+  /* ============ BAŞLAT ============ */
+  renderGrid();
+})();
+</script>
+</body>
+</html>
